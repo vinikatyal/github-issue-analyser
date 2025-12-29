@@ -15,6 +15,12 @@ uv run uvicorn src:main --reload
 - Github Token 
 - Open AI Key
 
+
+## What it does?
+
+1. You can cache all open issues from repo provided.
+2. Query the open issues of the repo saved and analyse it using the prompt provided
+
 ## Prompts used 
 
 

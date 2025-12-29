@@ -52,7 +52,8 @@ class GitHubService:
                             title=item["title"],
                             body=item.get("body"),
                             html_url=item["html_url"],
-                            created_at=item["created_at"]
+                            created_at=item["created_at"],
+                            updated_at=item["updated_at"]
                         )
                         issues.append(issue)
                 

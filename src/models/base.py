@@ -1,9 +1,8 @@
+""" Models for my services """
 from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional, List
 
-
-# ============== GitHub Issue Models ==============
 
 class GitHubIssue(BaseModel):
     """Model representing a GitHub issue from the API"""
@@ -12,12 +11,12 @@ class GitHubIssue(BaseModel):
     body: Optional[str] = None
     html_url: str
     created_at: datetime
+    updated_at: datetime
     
     class Config:
         from_attributes = True  # For ORM compatibility (SQLite)
 
 
-# ============== /scan Endpoint Models ==============
 
 class ScanRequest(BaseModel):
     """Request body for POST /scan"""
@@ -36,8 +35,6 @@ class ScanResponse(BaseModel):
     cached_successfully: bool
     message: Optional[str] = None
 
-
-# ============== /analyze Endpoint Models ==============
 
 class AnalyzeRequest(BaseModel):
     """Request body for POST /analyze"""
@@ -61,27 +58,3 @@ class AnalyzeResponse(BaseModel):
     repo: str
     prompt: str
     analysis: str  # LLM's response
-
-
-# ============== Error Models ==============
-
-class ErrorResponse(BaseModel):
-    """Standard error response"""
-    error: str
-    detail: Optional[str] = None
-    status_code: int
-
-
-# ============== Database/Cache Models ==============
-
-class CachedRepo(BaseModel):
-    """Metadata about a cached repository"""
-    repo: str
-    last_scanned: datetime
-    issue_count: int
-
-
-class CacheStatus(BaseModel):
-    """Response for cache status check (optional endpoint)"""
-    repos_cached: List[CachedRepo]
-    total_issues: int

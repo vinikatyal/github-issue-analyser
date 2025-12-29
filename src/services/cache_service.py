@@ -23,6 +23,7 @@ class CacheService:
                 body TEXT,
                 html_url TEXT NOT NULL,
                 created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL,
                 cached_at TEXT NOT NULL
             )
         """)
@@ -49,6 +50,7 @@ class CacheService:
 
             for issue in issues:
                 # Check if issue exists and get its cached version
+                print("Issue", issue)
                 cursor.execute("""
                     SELECT updated_at FROM issues WHERE id = ? AND repo = ?
                 """, (issue.id, repo))

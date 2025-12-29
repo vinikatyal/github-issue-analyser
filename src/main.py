@@ -35,7 +35,6 @@ async def scan(scan_input: ScanRequest):
     """
     Fetch all open issues from a GitHub repository and cache them locally.
     """
-    print(f"Scan Input: {scan_input}")
     
     # Validate repo format
     if "/" not in scan_input.repo or scan_input.repo.count("/") != 1:
@@ -50,7 +49,7 @@ async def scan(scan_input: ScanRequest):
         print(f"Fetched {len(issues)} issues from {scan_input.repo}")
         
         # Cache issues locally
-        cached_successfully = cache_service.cache_issues(scan_input.repo, issues)
+        cached_successfully = cache_service.cache_issues_smart(scan_input.repo, issues)
         
         return ScanResponse(
             repo=scan_input.repo,
@@ -74,8 +73,6 @@ def analyze(analyze_request: AnalyzeRequest):
         print(f"Fetched {len(issues)} issues from {analyze_request.repo}")
         
         analysed_response = llm_service.analyze_issues(issues, analyze_request.prompt)
-
-        print("Response::", analysed_response)
 
         return AnalyzeResponse(
             repo=analyze_request.repo,
