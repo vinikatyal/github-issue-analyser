@@ -25,9 +25,15 @@ class LLMService:
         issues_text = self._format_issues(issues)
 
         # Create the system and user messages
-        system_message = """You are a helpful assistant that analyzes GitHub issues. 
+        system_message = """You are a Github Issue Analyser. 
         You will be given a list of issues and a prompt asking you to analyze them.
-        Provide clear, actionable insights based on the issues provided."""
+        Provide clear, actionable insights based on the issues provided.
+        
+        ## What to adhere to 
+        1. Make sure you follow the instructions in the prompt
+        2. Keep the analysis small and point to the relevant issues where needed.
+        3. Respond in only text format, no markdown
+        """
 
         user_message = f"""Here are the GitHub issues to analyze:
 
@@ -44,8 +50,7 @@ class LLMService:
                 {"role": "system", "content": system_message},
                 {"role": "user", "content": user_message}
             ],
-            temperature=0.7,
-            max_tokens=4000
+            temperature=0.7
         )
 
         return response.choices[0].message.content

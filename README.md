@@ -9,3 +9,12 @@ python -m venv hello
 source hello/bin/activate
 uv run uvicorn src:main --reload
 ```
+
+## What you need
+
+- Github Token 
+- Open AI Key
+
+## Prompts used 
+
+
